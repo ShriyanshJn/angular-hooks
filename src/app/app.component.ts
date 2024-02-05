@@ -14,6 +14,7 @@ export class AppComponent {
 
   private num: number = 4;
   num2: number = 40;
+  numbers: number[] = [];
 
   get counter() {
     return this.num;
@@ -31,4 +32,7 @@ export class AppComponent {
     this.counter--
   }
 
+  add() {
+    this.numbers.push(1)
+  }
 }

@@ -13,7 +13,8 @@
     <div>
       <button (click)="increment()">Increment</button>
       <button (click)="decrement()">Decrement</button>
-      <app-child [myCounter]="counter" [num2]="num2"></app-child>
+      <button (click)="add()">Add</button>
+      <app-child [myCounter]="counter" [num2]="num2" [numbers]="numbers"></app-child>
     </div>
   </div>
 </body>
