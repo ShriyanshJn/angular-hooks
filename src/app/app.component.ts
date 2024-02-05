@@ -10,5 +10,14 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-hooks';
+
+  private num: number = 4;
+
+  get counter() {
+    return this.num;
+  }
+
+  set counter(value) {
+    this.num = value
+  }
 }
