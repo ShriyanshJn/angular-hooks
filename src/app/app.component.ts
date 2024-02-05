@@ -15,6 +15,11 @@ export class AppComponent {
   private num: number = 4;
   num2: number = 40;
   numbers: number[] = [];
+  isVisible: boolean = true;
+
+  setVisibility() {
+    this.isVisible = !this.isVisible;
+  }
 
   get counter() {
     return this.num;

@@ -3,7 +3,7 @@
 //!     But if we reinitialize array/object their memory location gets updated and ngOnChanges is triggred instead of ngDoCheck
 
 import { CommonModule } from '@angular/common';
-import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -12,7 +12,7 @@ import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, DoChec
   templateUrl: './child.component.html',
   styleUrl: './child.component.scss'
 })
-export class ChildComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit {
+export class ChildComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
   @Input() myCounter!: number
   @Input() num2!: number
   public changeLog: string[] = [];
@@ -60,4 +60,17 @@ export class ChildComponent implements OnChanges, OnInit, DoCheck, AfterContentI
     console.log("ngAfterViewInit")
     this.changeLog.push("ngAfterViewInit")
   }
+
+  //* used to check if the data coming from the parent component is successfully initialised and to do dom MANIPLUAITON ON THAT COMPONENT 
+  ngAfterViewChecked(): void {
+    console.log("ngAfterViewChecked")
+    this.changeLog.push("ngAfterViewChecked")
+  }
+
+  //? this hook will be triggered when this component is not visible on our screen (maybe we navigate to different page), unsubscribing from observables, remove setTImeOUT setInterval, use output emit here
+  ngOnDestroy(): void {
+    console.log("ngOnDestroy")
+    this.changeLog.push("ngOnDestroy")
+  }
+
 }

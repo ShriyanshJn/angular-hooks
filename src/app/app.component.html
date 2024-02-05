@@ -14,8 +14,10 @@
       <button (click)="increment()">Increment</button>
       <button (click)="decrement()">Decrement</button>
       <button (click)="add()">Add</button>
-      <app-child [myCounter]="counter" [num2]="num2" [numbers]="numbers"> Coming from parent component using ng-content
+      <app-child *ngIf="isVisible" [myCounter]="counter" [num2]="num2" [numbers]="numbers"> Coming from parent component
+        using ng-content
         tag in child</app-child>
+      <button (click)="setVisibility()">Show/Hide</button>
     </div>
   </div>
 </body>
