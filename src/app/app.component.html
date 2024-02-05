@@ -14,7 +14,8 @@
       <button (click)="increment()">Increment</button>
       <button (click)="decrement()">Decrement</button>
       <button (click)="add()">Add</button>
-      <app-child [myCounter]="counter" [num2]="num2" [numbers]="numbers"></app-child>
+      <app-child [myCounter]="counter" [num2]="num2" [numbers]="numbers"> Coming from parent component using ng-content
+        tag in child</app-child>
     </div>
   </div>
 </body>

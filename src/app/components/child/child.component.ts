@@ -3,7 +3,7 @@
 //!     But if we reinitialize array/object their memory location gets updated and ngOnChanges is triggred instead of ngDoCheck
 
 import { CommonModule } from '@angular/common';
-import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -12,12 +12,13 @@ import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChange, SimpleChang
   templateUrl: './child.component.html',
   styleUrl: './child.component.scss'
 })
-export class ChildComponent implements OnChanges, OnInit, DoCheck {
+export class ChildComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit {
   @Input() myCounter!: number
   @Input() num2!: number
   public changeLog: string[] = [];
   @Input() numbers!: number[];
 
+  //* triggered initially and whenever a new value comes in ngOnChanges
   ngOnChanges(changes: SimpleChanges): void {
     console.log('ngOnChanges')
     console.log(changes)
@@ -34,9 +35,29 @@ export class ChildComponent implements OnChanges, OnInit, DoCheck {
     this.changeLog.push('ngOnInit')
   }
 
-  //* triggered initially and whenever a new value comes in ngOnChanges
   ngDoCheck(): void {
     console.log("ngDoCheck")
     this.changeLog.push(`ngDoCheck: ${this.numbers.toString()}`)
+  }
+
+  //* ngAfterContentInit hook is used to check if the data coming from the parent component (ng-content) has been initialized properly and also for complex computations
+  //* only <ng-content>
+  ngAfterContentInit(): void {
+    console.log("ngAfterContentInit")
+    this.changeLog.push("ngAfterContentInit")
+  }
+
+  //* triggered after ngDoCheck and after ngAfterContentInit
+  //* used to check if the data coming from the parent component is successfully initialised and to do dom MANIPLUAITON ON THAT COMPONENT
+  ngAfterContentChecked(): void {
+    console.log("ngAfterContentChecked")
+    this.changeLog.push("ngAfterContentChecked")
+  }
+
+  //* ngAfterViewInit hook is used to check if the data coming from the parent component (whole) has been initialized properly and loaded successfully in UI
+  //* whole child component
+  ngAfterViewInit(): void {
+    console.log("ngAfterViewInit")
+    this.changeLog.push("ngAfterViewInit")
   }
 }
