@@ -9,7 +9,12 @@
 
 <body>
   <div style="text-align: center;">
-    Angular Hooks
+    <h1>Angular Hooks</h1>
+    <div>
+      <button (click)="increment()">Increment</button>
+      <button (click)="decrement()">Decrement</button>
+      <app-child [myCounter]="counter" [num2]="num2"></app-child>
+    </div>
   </div>
 </body>
 
